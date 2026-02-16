@@ -24,12 +24,25 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final items = {
+      'Pizza': DateTime(2026, 2, 16),
+      'Burger': DateTime(2026, 2, 17),
+      'Sushi': DateTime(2026, 2, 18),
+    };
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Test Page'),
       ),
-      body: const Center(
-        child: Text('This is a test page.'),
+      body: ListView(
+        children: items.entries.map((entry) {
+          final date = entry.value;
+          final formattedDate = '${date.month}/${date.day}/${date.year}';
+          return ListTile(
+            title: Text(entry.key),
+            subtitle: Text('Expiration Date: $formattedDate'),
+          );
+        }).toList(),
       ),
     );
   }
