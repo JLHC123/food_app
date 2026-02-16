@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/test_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -108,6 +109,15 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const TestPage()),
+                );
+              },
+              child: const Text('Go to Test Page'),
             ),
           ],
         ),
