@@ -44,10 +44,12 @@ class _MyHomePageState extends State<MyHomePage> {
         content: Column(
           children: [
             TextField(
+              controller: itemController,
               decoration: const InputDecoration(labelText: 'Item Name'),
             ),
             TextField(
-              decoration: const InputDecoration(labelText: 'Expiration Date'),
+              controller: expirationDateController,
+              decoration: const InputDecoration(labelText: 'Expiration Date (MM/DD/YYYY)'),
             )
           ]
         ),
@@ -58,7 +60,16 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           TextButton(
             onPressed: () {
-              // add item logic in next commit
+              // splits the expiration date into month, day, and year
+              final parts = expirationDateController.text.split('/');
+              final month = int.parse(parts[0]);
+              final day = int.parse(parts[1]);
+              final year = int.parse(parts[2]);
+              
+              setState(() {
+                items[itemController.text] = DateTime(year, month, day);
+              });
+
               Navigator.pop(context);
             },
             child: const Text('Add'),
