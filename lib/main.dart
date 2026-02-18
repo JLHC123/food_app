@@ -28,9 +28,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final items = {
-      'Pizza': DateTime(2026, 2, 16),
-      'Burger': DateTime(2026, 2, 17),
-      'Sushi': DateTime(2026, 2, 18),
+      'Pizza': DateTime(2026, 02, 16),
+      'Burger': DateTime(2026, 02, 17),
+      'Sushi': DateTime(2026, 02, 18),
   };
 
   void _addItem() {
@@ -38,6 +38,16 @@ class _MyHomePageState extends State<MyHomePage> {
       context: context, 
       builder:(context) => AlertDialog(
         title: const Text('Add New Item'),
+        content: Column(
+          children: [
+            TextField(
+              decoration: const InputDecoration(labelText: 'Item Name'),
+            ),
+            TextField(
+              decoration: const InputDecoration(labelText: 'Expiration Date'),
+            )
+          ]
+        ),
       ),
     );
   }
