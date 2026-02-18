@@ -19,17 +19,31 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final items = {
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final items = {
       'Pizza': DateTime(2026, 2, 16),
       'Burger': DateTime(2026, 2, 17),
       'Sushi': DateTime(2026, 2, 18),
-    };
+  };
 
+  void _addItem() {
+    showDialog(
+      context: context, 
+      builder:(context) => AlertDialog(
+        title: const Text('Add New Item'),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Test Page'),
@@ -43,6 +57,10 @@ class MyHomePage extends StatelessWidget {
             subtitle: Text('Expiration Date: $formattedDate'),
           );
         }).toList(),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _addItem,
+        child: const Icon(Icons.add),
       ),
     );
   }
