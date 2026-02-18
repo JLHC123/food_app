@@ -34,6 +34,9 @@ class _MyHomePageState extends State<MyHomePage> {
   };
 
   void _addItem() {
+    final itemController = TextEditingController();
+    final expirationDateController = TextEditingController();
+
     showDialog(
       context: context, 
       builder:(context) => AlertDialog(
@@ -48,6 +51,11 @@ class _MyHomePageState extends State<MyHomePage> {
             )
           ]
         ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'))
+        ],
       ),
     );
   }
