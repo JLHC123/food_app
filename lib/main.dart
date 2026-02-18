@@ -54,7 +54,15 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'))
+            child: const Text('Cancel')
+          ),
+          TextButton(
+            onPressed: () {
+              // add item logic in next commit
+              Navigator.pop(context);
+            },
+            child: const Text('Add'),
+          ),
         ],
       ),
     );
