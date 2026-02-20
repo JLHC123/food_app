@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 
+class FoodItem {
+  final String name;
+  final DateTime expirationDate;
+  
+FoodItem({required this.name, required this.expirationDate});
+}
+
 void main() {
   runApp(const MyApp());
 }
@@ -27,11 +34,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final items = {
-      'Pizza': DateTime(2026, 02, 16),
-      'Burger': DateTime(2026, 02, 17),
-      'Sushi': DateTime(2026, 02, 18),
-  };
+  // changed to FoodItem type
+  final items = [
+      FoodItem(name: 'Pizza', expirationDate: DateTime(2024, 6, 22)),
+      FoodItem(name: 'Sushi', expirationDate: DateTime(2024, 6, 20)),
+      FoodItem(name: 'Burger', expirationDate: DateTime(2024, 6, 21)),
+  ];
 
   void _addItem() {
     final itemController = TextEditingController();
@@ -66,8 +74,12 @@ class _MyHomePageState extends State<MyHomePage> {
               final day = int.parse(parts[1]);
               final year = int.parse(parts[2]);
               
+              // changed to add FoodItem type
               setState(() {
-                items[itemController.text] = DateTime(year, month, day);
+                items.add(FoodItem(
+                  name: itemController.text, 
+                  expirationDate: DateTime(year, month, day)
+                ));
               });
 
               Navigator.pop(context);
@@ -86,11 +98,11 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('Test Page'),
       ),
       body: ListView(
-        children: items.entries.map((entry) {
-          final date = entry.value;
-          final formattedDate = '${date.month}/${date.day}/${date.year}';
+        // changed to add FoodItem type and format expiration date as MM/DD/YYYY
+        children: items.map((item) {
+          final formattedDate = '${item.expirationDate.month}/${item.expirationDate.day}/${item.expirationDate.year}';
           return ListTile(
-            title: Text(entry.key),
+            title: Text(item.name),
             subtitle: Text('Expiration Date: $formattedDate'),
           );
         }).toList(),
