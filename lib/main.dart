@@ -40,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
       FoodItem(name: 'Sushi', expirationDate: DateTime(2024, 6, 20)),
       FoodItem(name: 'Burger', expirationDate: DateTime(2024, 6, 21)),
   ];
-
+  
   void _addItem() {
     final itemController = TextEditingController();
     final expirationDateController = TextEditingController();
@@ -92,7 +92,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) 
+  {
+    items.sort((a, b) => a.expirationDate.compareTo(b.expirationDate));
     return Scaffold(
       appBar: AppBar(
         title: const Text('Test Page'),
